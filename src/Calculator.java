@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,13 +26,17 @@ public class Calculator extends JFrame implements ActionListener {
         window.setLayout(null); //Verhindert das Zerschließen des Fensters, wenn Größenänderung. Aber: bisher keine Anpassung der Elemente
         window.setVisible(true); //Frame sichtbar machen
 
+        //nun Teilen wir das Fenster in panels, die wir später befüllen werden
+        JPanel[] panels = new JPanel[3];
+        JPanel head, center, button;
+
         //wir bauen das Fenster von oben nach unten auf und starten mit dem Textfeld, in dem die Eignabe des Nutzers erscheint
         JTextField textfield = new JTextField(); //Textfeld anlegen
         textfield.setSize(300, 50);
 
-
         //nun müssen wir die gewünschten Bauteile noch dem Fenster hinzufügen
-        window.add(textfield);
+        window.add(textfield, BorderLayout.NORTH);
+
 
     }
     public static void main(String[] args){
