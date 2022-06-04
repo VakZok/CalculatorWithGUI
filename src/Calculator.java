@@ -36,11 +36,20 @@ public class Calculator extends JFrame implements ActionListener {
 
         //wir erzeugen die numberButtons, weisen Sie dem Array hinzugeben, geben ihnen einen ActionListener und fügen sie dem numberPanel hinzu
         JButton[] numberButtons = new JButton[12];
-        for (int i=0; i<numberButtons.length-3; i++){ //
+        //Buttons von 0-9 erzeugen
+        for (int i=0; i<numberButtons.length-2; i++){ //
             numberButtons[i] = new JButton(String.valueOf(i)); //die Buttons werden mit dem Wert als Text erzeugt und dem Array hinzugefügt
-            numberButtons[i].addActionListener(this); //ActionListener hinzufügen
-            numberPanel.add(numberButtons[i]);
         }
+        //Buttons (-) und ANS erzeugen
+        JButton answer = new JButton("ANS");
+        JButton negate = new JButton("(-)");
+        numberButtons[10] = answer;
+        numberButtons[11] = negate;
+        //numberButtons den ActionListener zuweisen
+        for (JButton numberButton : numberButtons) {
+            numberButton.addActionListener(this);
+        }
+        //und manuell dem 
 
         //das dritte Panel ist für unsere Operatoren und wird sich rechts anordnen
         JPanel operationPanel = new JPanel(new GridLayout(4,2)); //das operationPanel bekommt 4 Zeile und zwei Reihen
@@ -75,7 +84,7 @@ public class Calculator extends JFrame implements ActionListener {
         functionPanel.setBackground(Color.GREEN);
         //nun erzeugen wir die functionButtons und weisen sie dem Array hinzu
         JButton[] functionButtons = new JButton[2];
-        functionButtons[0] = new JButton("Delete");
+        functionButtons[0] = new JButton("Del");
         functionButtons[1] = new JButton("Clear");
         //wir geben ihnen ebenfalls einen actionListener und fügen sie dem functionPanel hinzu
         for (JButton functionButton : functionButtons){
