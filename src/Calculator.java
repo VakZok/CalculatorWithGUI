@@ -49,7 +49,19 @@ public class Calculator extends JFrame implements ActionListener {
         for (JButton numberButton : numberButtons) {
             numberButton.addActionListener(this);
         }
-        //und manuell dem 
+        //und manuell dem Grid zuweisen, damit ein realitätsgetreues Grid Testenfeld entsteht
+        numberPanel.add(numberButtons[7]); //7
+        numberPanel.add(numberButtons[8]); //8
+        numberPanel.add(numberButtons[9]); //9
+        numberPanel.add(numberButtons[4]); //4
+        numberPanel.add(numberButtons[5]); //5
+        numberPanel.add(numberButtons[6]); //6
+        numberPanel.add(numberButtons[1]); //1
+        numberPanel.add(numberButtons[2]); //2
+        numberPanel.add(numberButtons[3]); //3
+        numberPanel.add(numberButtons[11]); //(-)
+        numberPanel.add(numberButtons[0]); //0
+        numberPanel.add(numberButtons[10]); //ANS
 
         //das dritte Panel ist für unsere Operatoren und wird sich rechts anordnen
         JPanel operationPanel = new JPanel(new GridLayout(4,2)); //das operationPanel bekommt 4 Zeile und zwei Reihen
