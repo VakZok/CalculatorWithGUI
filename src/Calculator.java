@@ -32,6 +32,7 @@ public class Calculator extends JFrame implements ActionListener {
 
     //Attribute zur späteren Übergabe des Userinputs
     int number1=0, number2=0, result=0;
+    String operator;
 
     //Konstruktor
     public Calculator() {
@@ -44,7 +45,6 @@ public class Calculator extends JFrame implements ActionListener {
         window.setLayout(new BorderLayout()); //Wir geben dem Fenster ein Border Layout
 
 
-        //Panels erzeugen; Textfeld und Buttons hinzufügen
         //Textfield
         //wir bauen das Fenster von oben nach unten auf und starten mit dem ersten Panel, welches sich im head (north) befindet
         JPanel textPanel = new JPanel();
@@ -133,7 +133,7 @@ public class Calculator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) { //im Falle eines gedrückten Buttons muss angegeben werden,was passieren soll --> if für jeden Button / Gruppe von Buttons
 
         //Es wird quasi das Objekt der Ursache zurückgegeben und gegen alle möglichen Objekte (Buttons) verglichen
-        //Implementiert wird die entsprechende Behandlung im Falle von Objekt (Button) XY
+        //Umgesetzt wird die entsprechende Behandlung im Falle von Objekt (Button) XY
 
         //Überprüfen auf Number Buttons
         for (JButton numberbutton : numberButtons) { //eine for-each Schleife iteriert durch jeden numberButton
@@ -142,24 +142,43 @@ public class Calculator extends JFrame implements ActionListener {
             }
         }
 
-        //Überprüfen auf Operation Buttons
+        //als nächstes implementieren wir die Aktionen der einzelnen Funktionsbuttons (Rechenoperatoren)
+        //Wird ein function button gedrückt so wird der Wert des Tetfeldes der ersten Variable übergeben. Das textfeld wird anschließend geleert
         for (JButton operationButton : operationButtons) {
             if (e.getSource() == operationButton) {
-                textfield.setText(textfield.getText().concat(operationButton.getText()));
+                number1 = Integer.parseInt(textfield.getText()); //wir weisen der Instanzvariable den ersten Userinput zu
+                textfield.setText(""); //und clearen/löschen den Inhalt des Textfeldes
             }
         }
 
-        //nun kümmenr wir uns noch um negate, ans, del udn clear
+        //Operatoren für die switch Anweisung hinzufügen
+        if (e.getSource() == addButton) {
+            operator = addButton.getText();
+        } else if (e.getSource() == subtractButton) {
+            operator = subtractButton.getText();
+        } else if (e.getSource() == multiplyButton) {
+            operator = multiplyButton.getText();
+        } else if (e.getSource() == divideButton) {
+            operator = divideButton.getText();
+        } else if (e.getSource() == moduloButton) {
+            operator = moduloButton.getText();
+        } else if (e.getSource() == crossSumButton) {
+            operator = crossSumButton.getText();
+        } else if (e.getSource() == totalSumButton) {
+            operator = totalSumButton.getText();
+        }
+
+        if (e.getSource() == equalsButton) {
+            number2 = Integer.parseInt(textfield.getText()); //bei euqals wird der zweiten Variablen ein Wert zugeschrieben. Bis dahin wird immer die erste pberschrieben
+            textfield.setText("");
+
+
+        }
+
+        //nun kümmenr wir uns noch um negate, ans, del und clear
         if (e.getSource() == clear) {
             textfield.setText(""); //wir setzten das Eingabefeld als leer
         }
-
-        //als nächstes implementieren wir die Aktionen der einzelnen Funktionsbuttons (Rechenoperatoren)
-        if (e.getSource() == addButton) { //
-            number1 = Integer.parseInt(textfield.getText()); //wir weisen der Instanzvariable den ersten Userinput zu
-            textfield.setText(""); //und clearen/löschen den Inhalt des Textfeldes
-        }
-
     }
 }
 
