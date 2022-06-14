@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Calculator extends JFrame implements ActionListener {
 
@@ -11,7 +12,8 @@ public class Calculator extends JFrame implements ActionListener {
     //Number Buttons
     JButton[] numberButtons = new JButton[10]; //wir erzeugen ein Array für unsere Number Buttons
 
-    //Ans
+    //Ans und Random
+    JButton randomNumber = new JButton("Random");
     JButton answer = new JButton("Ans");
 
     //Operation Buttons
@@ -63,7 +65,8 @@ public class Calculator extends JFrame implements ActionListener {
             numberButtons[i].addActionListener(this); //und geben ihnen den Actionlistener
         }
 
-        //answer ActionListener
+        //random und answer ActionListener
+        randomNumber.addActionListener(this);
         answer.addActionListener(this);
 
         //Buttons manuell dem Grid hinzufügen --> realitätsgetreu
@@ -76,7 +79,7 @@ public class Calculator extends JFrame implements ActionListener {
         numberPanel.add(numberButtons[1]);
         numberPanel.add(numberButtons[2]);
         numberPanel.add(numberButtons[3]);
-        numberPanel.add(decimal);
+        numberPanel.add(randomNumber);
         numberPanel.add(numberButtons[0]);
         numberPanel.add(answer);
 
@@ -140,7 +143,15 @@ public class Calculator extends JFrame implements ActionListener {
             }
         }
 
-        //Ans
+        //Random und Ans
+        if (e.getSource() == randomNumber) {
+            Random random = new Random(); //wir erzeugen ein neues Objekt random
+            int randomNumber = random.nextInt(); // und weisen der localen Variable einen random integer zu
+            while (randomNumber < 1) {
+                randomNumber = random.nextInt(); // sollte der integer negativ sein, wird so lange ein neuer random integer generiert, bis der Wert positiv ist
+            }
+            textfield.setText(String.valueOf(randomNumber)); //dann wandeln wir den Wert in einen String und geben ihn aus
+        }
         if (e.getSource() == answer) {
             textfield.setText(String.valueOf(result));
         }
