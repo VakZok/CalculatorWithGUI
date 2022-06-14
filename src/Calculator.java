@@ -11,8 +11,7 @@ public class Calculator extends JFrame implements ActionListener {
     //Number Buttons
     JButton[] numberButtons = new JButton[10]; //wir erzeugen ein Array für unsere Number Buttons
 
-    //Negate und Ans
-    JButton decimal = new JButton(".");
+    //Ans
     JButton answer = new JButton("Ans");
 
     //Operation Buttons
@@ -55,8 +54,8 @@ public class Calculator extends JFrame implements ActionListener {
 
         //Numbers
         //Das zweite Panel ist für unsere Nummern von 0-9, erg und negierte Werte (-). Es wird im Center liegen
-        JPanel numberPanel = new JPanel(new GridLayout(4,3, 10, 10)); //wir geben dem panel ein Grid mit 4 Zeilen und 3 Spalte und die Buttons haben jeweils 10 Pixel Abstand zueinander
-        numberPanel.setBackground(Color.DARK_GRAY);
+        JPanel numberPanel = new JPanel(new GridLayout(4,3, 5, 5)); //wir geben dem panel ein Grid mit 4 Zeilen und 3 Spalte und die Buttons haben jeweils 5 Pixel Abstand zueinander
+        numberPanel.setBackground(Color.LIGHT_GRAY);
 
         //Number Buttons Text und Actionlistener
         for (int i = 0; i < numberButtons.length; i++) {
@@ -64,8 +63,7 @@ public class Calculator extends JFrame implements ActionListener {
             numberButtons[i].addActionListener(this); //und geben ihnen den Actionlistener
         }
 
-        //negate und answer ActionListener
-        decimal.addActionListener(this);
+        //answer ActionListener
         answer.addActionListener(this);
 
         //Buttons manuell dem Grid hinzufügen --> realitätsgetreu
@@ -85,8 +83,8 @@ public class Calculator extends JFrame implements ActionListener {
 
         //Operations
         //das dritte Panel ist für unsere Operatoren und wird sich rechts anordnen
-        JPanel operationPanel = new JPanel(new GridLayout(4,2)); //das operationPanel bekommt 4 Zeile und 2 Spalten
-        operationPanel.setBackground(Color.BLUE);
+        JPanel operationPanel = new JPanel(new GridLayout(4,2, 5 ,5)); //das operationPanel bekommt 4 Zeile und 2 Spalten
+        operationPanel.setBackground(Color.LIGHT_GRAY);
 
         //wir weisen die Operations Buttons dem Array hinzu
         operationButtons[0] = addButton;
@@ -142,13 +140,9 @@ public class Calculator extends JFrame implements ActionListener {
             }
         }
 
-        //Ans & Decimal
+        //Ans
         if (e.getSource() == answer) {
             textfield.setText(String.valueOf(result));
-        }
-        if (e.getSource() == decimal) {
-            String text = textfield.getText().replace(".", ""); //sollte bereits ein Dezimalbutton vorhanden sein, so wird dieser entfernt
-            textfield.setText(text.concat(".")); //nun fügen wir einen neuen Dezimalbutton am Ende des bisherigen Strings an
         }
 
         //als nächstes implementieren wir die Aktionen der einzelnen Funktionsbuttons (Rechenoperatoren)
