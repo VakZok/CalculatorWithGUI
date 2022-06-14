@@ -1,10 +1,11 @@
 import javax.swing.*;
 
-public class TestingStuff {
+public class TestingStuff extends Calculations{
     public static void main(String[] args){
-        int i=15;
-        double d=15.50;
-        System.out.println(i%10);
-        System.out.println(d%10);
+        int a = 10;
+        int b = 15;
+        Calculations calc = new Calculations();
+        System.out.println(calc.sum(a, b));
+        System.out.println(calc.cross(b));
     }
 }
