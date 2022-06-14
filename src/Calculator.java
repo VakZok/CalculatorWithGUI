@@ -12,7 +12,7 @@ public class Calculator extends JFrame implements ActionListener {
     JButton[] numberButtons = new JButton[10]; //wir erzeugen ein Array für unsere Number Buttons
 
     //Negate und Ans
-    JButton negate = new JButton("(-)");
+    //JButton negate = new JButton("(-)");
     JButton answer = new JButton("Ans");
 
     //Operation Buttons
@@ -65,7 +65,7 @@ public class Calculator extends JFrame implements ActionListener {
         }
 
         //negate und answer ActionListener
-        negate.addActionListener(this);
+        //negate.addActionListener(this);
         answer.addActionListener(this);
 
         //Buttons manuell dem Grid hinzufügen --> realitätsgetreu
@@ -78,7 +78,7 @@ public class Calculator extends JFrame implements ActionListener {
         numberPanel.add(numberButtons[1]);
         numberPanel.add(numberButtons[2]);
         numberPanel.add(numberButtons[3]);
-        numberPanel.add(negate);
+        //numberPanel.add(negate);
         numberPanel.add(numberButtons[0]);
         numberPanel.add(answer);
 
@@ -207,7 +207,7 @@ public class Calculator extends JFrame implements ActionListener {
             textfield.setText(String.valueOf(result));
         }
 
-        //nun kümmenrn wir uns noch um negate, ans, del und clear
+        //nun kümmenrn wir uns noch um ans, del und clear
         if (e.getSource() == clear) {
             textfield.setText(""); //wir setzten das Eingabefeld als leer
         }
