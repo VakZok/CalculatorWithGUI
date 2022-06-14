@@ -35,8 +35,9 @@ public class Calculator extends JFrame implements ActionListener {
     int number1=0, number2=0, result=0;
     String operator;
 
-    //Wir fügen ein FOnt hinzu, um die Buttons besser lesbar zu machen
-    Font myFont = new Font("", Font.BOLD, 17);
+    //Wir fügen zwei Fonts hinzu, um alles besser lesbar zu machen
+    Font myTextfieldFont = new Font("", Font.BOLD, 50);
+    Font myButtonFont = new Font("", Font.BOLD, 17);
 
     //Konstruktor
     public Calculator() {
@@ -55,7 +56,7 @@ public class Calculator extends JFrame implements ActionListener {
         textPanel.setBackground(Color.LIGHT_GRAY);
         textfield.setSize(300, 500); //Textfield Maßen zuweisen
         textfield.setEditable(false); //Eingabe in das Textfeld verbieten
-        textfield.setFont(myFont); //wir fügen unser Font hinzu
+        textfield.setFont(myTextfieldFont); //wir fügen unser Font hinzu
         textPanel.add(textfield); //Textfeld dem Text Panel hinzufügen
 
 
@@ -67,13 +68,13 @@ public class Calculator extends JFrame implements ActionListener {
         //Number Buttons Text und Actionlistener
         for (int i = 0; i < numberButtons.length; i++) {
             numberButtons[i] = new JButton(String.valueOf(i)); //wir weisen den Number Buttons ihren Text zu
-            numberButtons[i].setFont(myFont);
+            numberButtons[i].setFont(myButtonFont);
             numberButtons[i].addActionListener(this); //und geben ihnen den Actionlistener
         }
 
         //random und answer Font und ActionListener
-        randomNumber.setFont(myFont);
-        answer.setFont(myFont);
+        randomNumber.setFont(myButtonFont);
+        answer.setFont(myButtonFont);
         randomNumber.addActionListener(this);
         answer.addActionListener(this);
 
@@ -110,7 +111,7 @@ public class Calculator extends JFrame implements ActionListener {
         //nun fügen wir den Buttons noch einen ActionListener hinzu und adden sie dem operationPanel
         for (JButton operationButton : operationButtons) {
             operationButton.addActionListener(this);
-            operationButton.setFont(myFont);
+            operationButton.setFont(myButtonFont);
             operationPanel.add(operationButton);
         }
 
@@ -120,8 +121,8 @@ public class Calculator extends JFrame implements ActionListener {
         textPanel.setBackground(Color.LIGHT_GRAY);
 
         //wir geben den function Buttons ebenfalls einen actionListener und fügen sie dem functionPanel hinzu
-        delete.setFont(myFont);
-        clear.setFont(myFont);
+        delete.setFont(myButtonFont);
+        clear.setFont(myButtonFont);
         delete.addActionListener(this);
         clear.addActionListener(this);
         functionPanel.add(delete);
