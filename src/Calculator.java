@@ -143,40 +143,62 @@ public class Calculator extends JFrame implements ActionListener {
         }
 
         //als nächstes implementieren wir die Aktionen der einzelnen Funktionsbuttons (Rechenoperatoren)
-        //Wird ein function button gedrückt so wird der Wert des Tetfeldes der ersten Variable übergeben. Das textfeld wird anschließend geleert
-        for (int i=0; i<operationButtons.length-2; i++) { //das funktioniert nur für die ersten 5 Buttons, da Quersumme und TotalSum keinen zweiten Input benötigen und daher extra behandelt werden müssen
-            number1 = Integer.parseInt(textfield.getText()); //wir weisen der Instanzvariable den ersten Userinput zu
-            textfield.setText(""); //und clearen/löschen den Inhalt des Textfeldes
-        }
-
-        //Operatoren für die switch Anweisung hinzufügen
+        //Wird ein operation button (exklusive crossSum) gedrückt so wird der Wert des Tetfeldes der ersten Variable übergeben. Das textfeld wird anschließend geleert
         if (e.getSource() == addButton) {
-            operator = addButton.getText();
+            number1 = Integer.parseInt(textfield.getText()); //wir weisen der Instanzvariable den ersten Userinput zu
+            operator = addButton.getText(); //Operatoren für die switch Anweisung hinzufügen
+            textfield.setText(""); //und clearen den Inhalt des Textfeldes
         } else if (e.getSource() == subtractButton) {
+            number1 = Integer.parseInt(textfield.getText());
             operator = subtractButton.getText();
+            textfield.setText("");
         } else if (e.getSource() == multiplyButton) {
-            operator = multiplyButton.getText();
+            number1 = Integer.parseInt(textfield.getText());
+            operator = subtractButton.getText();
+            textfield.setText("");
         } else if (e.getSource() == divideButton) {
-            operator = divideButton.getText();
+            number1 = Integer.parseInt(textfield.getText());
+            operator = subtractButton.getText();
+            textfield.setText("");
         } else if (e.getSource() == moduloButton) {
-            operator = moduloButton.getText();
+            number1 = Integer.parseInt(textfield.getText());
+            operator = subtractButton.getText();
+            textfield.setText("");
+        } else if (e.getSource() == totalSumButton) {
+            number1 = Integer.parseInt(textfield.getText());
+            operator = totalSumButton.getText();
+            textfield.setText("");
+        } else if (e.getSource() == crossSumButton) { //bei cross sum und total sum wird die Rechnenoperation sofort ausgeführt, weil diese nur einen einzigen Input haben
+            number1 = Integer.parseInt(textfield.getText());
+            int digit = 0;
+            while (number1 > 0) { //wiederverwendeter Code
+               digit = number1 % 10; // through modulo 10, the last digit is always split of as a rest
+               result = result + digit; // the split of (last) digit is added to the result (cross sum)
+               number1 = number1 / 10; // because the variable "number" is an integer, dividing by 10 cuts of the last digit (it is not rounded)
+            }
+            textfield.setText(String.valueOf(result)); //wir lassen das Ergebnis im Textfeld anzeigen
         }
 
         if (e.getSource() == equalsButton) {
             number2 = Integer.parseInt(textfield.getText()); //bei euqals wird der zweiten Variablen ein Wert zugeschrieben. Bis dahin wird immer die erste pberschrieben
 
             switch (operator) { //Rechenoperationen durchführen mittels Lambda expressions
-                case "+" -> this.result = number1 + number2;
-                case "-" -> this.result = number1 - number2;
-                case "*" -> this.result = number1 * number2;
-                case "/" -> this.result = number1 / number2;
-                case "%" -> this.result = number1 % number2;
+                case "+" -> result = number1 + number2;
+                case "-" -> result = number1 - number2;
+                case "*" -> result = number1 * number2;
+                case "/" -> result = number1 / number2;
+                case "%" -> result = number1 % number2;
             }
 
             textfield.setText(String.valueOf(result)); //Wir wandeln das Ergebnis wieder in einen String, den wir dann im Textfeld ausgeben
         }
 
-        //nun kümmenr wir uns noch um negate, ans, del und clear
+        //Ans
+        if (e.getSource() == answer) {
+            textfield.setText(String.valueOf(result));
+        }
+
+        //nun kümmenrn wir uns noch um negate, ans, del und clear
         if (e.getSource() == clear) {
             textfield.setText(""); //wir setzten das Eingabefeld als leer
         }
