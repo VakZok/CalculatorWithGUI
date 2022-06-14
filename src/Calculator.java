@@ -23,8 +23,8 @@ public class Calculator extends JFrame implements ActionListener {
     JButton multiplyButton = new JButton("*");
     JButton divideButton = new JButton("/");
     JButton moduloButton = new JButton("%");
-    JButton crossSumButton = new JButton("CrossSum");
-    JButton totalSumButton = new JButton("Σ");
+    JButton crossSumButton = new JButton("quer");
+    JButton totalSumButton = new JButton("sum");
     JButton equalsButton = new JButton("=");
 
     //Clear und Delete
@@ -216,7 +216,7 @@ public class Calculator extends JFrame implements ActionListener {
                 case "*" -> result = number1 * number2;
                 case "/" -> result = number1 / number2;
                 case "%" -> result = number1 % number2;
-                case "Σ" -> { //wiederverwendeter Code
+                case "sum" -> { //wiederverwendeter Code
                     result = number1;
                     while(number1<number2) {
                             number1++;
