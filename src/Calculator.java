@@ -22,8 +22,8 @@ public class Calculator extends JFrame implements ActionListener {
     JButton multiplyButton = new JButton("*");
     JButton divideButton = new JButton("/");
     JButton moduloButton = new JButton("%");
-    JButton crossSumButton = new JButton("blank");
-    JButton totalSumButton = new JButton("Sigma");
+    JButton crossSumButton = new JButton("CrossSum");
+    JButton totalSumButton = new JButton("Σ");
     JButton equalsButton = new JButton("=");
 
     //Clear und Delete
@@ -144,11 +144,9 @@ public class Calculator extends JFrame implements ActionListener {
 
         //als nächstes implementieren wir die Aktionen der einzelnen Funktionsbuttons (Rechenoperatoren)
         //Wird ein function button gedrückt so wird der Wert des Tetfeldes der ersten Variable übergeben. Das textfeld wird anschließend geleert
-        for (JButton operationButton : operationButtons) {
-            if (e.getSource() == operationButton) {
-                number1 = Integer.parseInt(textfield.getText()); //wir weisen der Instanzvariable den ersten Userinput zu
-                textfield.setText(""); //und clearen/löschen den Inhalt des Textfeldes
-            }
+        for (int i=0; i<operationButtons.length-2; i++) { //das funktioniert nur für die ersten 5 Buttons, da Quersumme und TotalSum keinen zweiten Input benötigen und daher extra behandelt werden müssen
+            number1 = Integer.parseInt(textfield.getText()); //wir weisen der Instanzvariable den ersten Userinput zu
+            textfield.setText(""); //und clearen/löschen den Inhalt des Textfeldes
         }
 
         //Operatoren für die switch Anweisung hinzufügen
@@ -162,17 +160,20 @@ public class Calculator extends JFrame implements ActionListener {
             operator = divideButton.getText();
         } else if (e.getSource() == moduloButton) {
             operator = moduloButton.getText();
-        } else if (e.getSource() == crossSumButton) {
-            operator = crossSumButton.getText();
-        } else if (e.getSource() == totalSumButton) {
-            operator = totalSumButton.getText();
         }
 
         if (e.getSource() == equalsButton) {
             number2 = Integer.parseInt(textfield.getText()); //bei euqals wird der zweiten Variablen ein Wert zugeschrieben. Bis dahin wird immer die erste pberschrieben
-            textfield.setText("");
 
+            switch (operator) { //Rechenoperationen durchführen mittels Lambda expressions
+                case "+" -> this.result = number1 + number2;
+                case "-" -> this.result = number1 - number2;
+                case "*" -> this.result = number1 * number2;
+                case "/" -> this.result = number1 / number2;
+                case "%" -> this.result = number1 % number2;
+            }
 
+            textfield.setText(String.valueOf(result)); //Wir wandeln das Ergebnis wieder in einen String, den wir dann im Textfeld ausgeben
         }
 
         //nun kümmenr wir uns noch um negate, ans, del und clear
