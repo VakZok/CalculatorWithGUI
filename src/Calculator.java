@@ -171,11 +171,13 @@ public class Calculator extends JFrame implements ActionListener {
         } else if (e.getSource() == crossSumButton) { //bei cross sum und total sum wird die Rechnenoperation sofort ausgeführt, weil diese nur einen einzigen Input haben
             number1 = Integer.parseInt(textfield.getText());
             int digit = 0;
+            int crossSum = 0;
             while (number1 > 0) { //wiederverwendeter Code
                digit = number1 % 10; // through modulo 10, the last digit is always split of as a rest
-               result = result + digit; // the split of (last) digit is added to the result (cross sum)
+               crossSum = crossSum + digit; // the split of (last) digit is added to the result (cross sum)
                number1 = number1 / 10; // because the variable "number" is an integer, dividing by 10 cuts of the last digit (it is not rounded)
             }
+            result = crossSum;
             textfield.setText(String.valueOf(result)); //wir lassen das Ergebnis im Textfeld anzeigen
         }
 
