@@ -154,15 +154,15 @@ public class Calculator extends JFrame implements ActionListener {
             textfield.setText("");
         } else if (e.getSource() == multiplyButton) {
             number1 = Integer.parseInt(textfield.getText());
-            operator = subtractButton.getText();
+            operator = multiplyButton.getText();
             textfield.setText("");
         } else if (e.getSource() == divideButton) {
             number1 = Integer.parseInt(textfield.getText());
-            operator = subtractButton.getText();
+            operator = divideButton.getText();
             textfield.setText("");
         } else if (e.getSource() == moduloButton) {
             number1 = Integer.parseInt(textfield.getText());
-            operator = subtractButton.getText();
+            operator = moduloButton.getText();
             textfield.setText("");
         } else if (e.getSource() == totalSumButton) {
             number1 = Integer.parseInt(textfield.getText());
@@ -188,6 +188,13 @@ public class Calculator extends JFrame implements ActionListener {
                 case "*" -> result = number1 * number2;
                 case "/" -> result = number1 / number2;
                 case "%" -> result = number1 % number2;
+                case "Σ" -> { //wiederverwendeter Code
+                    result = number1;
+                    while(number1<number2) {
+                            number1++;
+                            result=result+number1;
+                    }
+                }
             }
 
             textfield.setText(String.valueOf(result)); //Wir wandeln das Ergebnis wieder in einen String, den wir dann im Textfeld ausgeben
