@@ -112,6 +112,7 @@ public class Calculator extends JFrame implements ActionListener {
         for (JButton operationButton : operationButtons) {
             operationButton.addActionListener(this);
             operationButton.setFont(myButtonFont);
+            operationButton.setBackground(Color.ORANGE); // um die Function Buttons abzuheben geben wir ihnen noch eine andere Farbe
             operationPanel.add(operationButton);
         }
 
