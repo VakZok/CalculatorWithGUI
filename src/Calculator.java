@@ -211,6 +211,10 @@ public class Calculator extends JFrame implements ActionListener {
         if (e.getSource() == clear) {
             textfield.setText(""); //wir setzten das Eingabefeld als leer
         }
+
+        if (e.getSource() == delete) {
+            textfield.setText(textfield.getText().substring(0, textfield.getText().length()-1));
+        }
     }
 }
 
