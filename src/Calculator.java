@@ -55,7 +55,6 @@ public class Calculator extends JFrame implements ActionListener {
         JPanel textPanel = new JPanel();
         textPanel.setBackground(Color.LIGHT_GRAY);
         textfield.setSize(300, 500); //Textfield Maßen zuweisen
-        textfield.setEditable(false); //Eingabe in das Textfeld verbieten
         textfield.setFont(myTextfieldFont); //wir fügen unser Font hinzu
         textPanel.add(textfield); //Textfeld dem Text Panel hinzufügen
 
