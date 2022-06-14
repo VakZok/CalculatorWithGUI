@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 public class Calculator extends JFrame implements ActionListener {
 
@@ -144,6 +143,9 @@ public class Calculator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) { //im Falle eines gedrückten Buttons muss angegeben werden,was passieren soll --> if für jeden Button / Gruppe von Buttons
 
+        //Wir erzeugen ein Objekt vom Typ Calculations, über das die Rechenoperationen aufgerufen werden
+        Calculations calc = new Calculations();
+
         //Es wird quasi das Objekt der Ursache zurückgegeben und gegen alle möglichen Objekte (Buttons) verglichen
         //Umgesetzt wird die entsprechende Behandlung im Falle von Objekt (Button) XY
 
@@ -156,12 +158,7 @@ public class Calculator extends JFrame implements ActionListener {
 
         //Random und Ans
         if (e.getSource() == randomNumber) {
-            Random random = new Random(); //wir erzeugen ein neues Objekt random
-            int randomNumber = random.nextInt(); // und weisen der localen Variable einen random integer zu
-            while (randomNumber < 1) {
-                randomNumber = random.nextInt(); // sollte der integer negativ sein, wird so lange ein neuer random integer generiert, bis der Wert positiv ist
-            }
-            textfield.setText(String.valueOf(randomNumber)); //dann wandeln wir den Wert in einen String und geben ihn aus
+            textfield.setText(String.valueOf(calc.random())); //dann wandeln wir den Wert in einen String und geben ihn aus
         }
         if (e.getSource() == answer) {
             textfield.setText(String.valueOf(result));
@@ -194,36 +191,20 @@ public class Calculator extends JFrame implements ActionListener {
             operator = totalSumButton.getText();
             textfield.setText("");
         } else if (e.getSource() == crossSumButton) { //bei cross sum und total sum wird die Rechnenoperation sofort ausgeführt, weil diese nur einen einzigen Input haben
-            number1 = Integer.parseInt(textfield.getText());
-            int digit = 0;
-            int crossSum = 0;
-            while (number1 > 0) { //wiederverwendeter Code
-               digit = number1 % 10; // through modulo 10, the last digit is always split of as a rest
-               crossSum = crossSum + digit; // the split of (last) digit is added to the result (cross sum)
-               number1 = number1 / 10; // because the variable "number" is an integer, dividing by 10 cuts of the last digit (it is not rounded)
-            }
-            result = crossSum;
-            textfield.setText(String.valueOf(result)); //wir lassen das Ergebnis im Textfeld anzeigen
+            textfield.setText(String.valueOf(calc.cross(Integer.parseInt(textfield.getText()))));
         }
 
         if (e.getSource() == equalsButton) {
             number2 = Integer.parseInt(textfield.getText()); //bei euqals wird der zweiten Variablen ein Wert zugeschrieben. Bis dahin wird immer die erste pberschrieben
 
             switch (operator) { //Rechenoperationen durchführen mittels Lambda expressions
-                case "+" -> result = number1 + number2;
-                case "-" -> result = number1 - number2;
-                case "*" -> result = number1 * number2;
-                case "/" -> result = number1 / number2;
-                case "%" -> result = number1 % number2;
-                case "sum" -> { //wiederverwendeter Code
-                    result = number1;
-                    while(number1<number2) {
-                            number1++;
-                            result=result+number1;
-                    }
-                }
+                case "+" -> result = calc.add(number1, number2);
+                case "-" -> result = calc.sub(number1, number2);
+                case "*" -> result = calc.multi(number1, number2);
+                case "/" -> result = calc.div(number1, number2);
+                case "%" -> result = calc.mod(number1, number2);
+                case "sum" -> result = calc.sum(number1, number2);
             }
-
             textfield.setText(String.valueOf(result)); //Wir wandeln das Ergebnis wieder in einen String, den wir dann im Textfeld ausgeben
         }
 
@@ -239,8 +220,6 @@ public class Calculator extends JFrame implements ActionListener {
 }
 
 /* Check
-ExitOnClose
-ELemente fixieren aber skalieren lassen
 Action listener (this) das this verstehen
 Warum kann ich in der Klasse nicht auf die dort angelegte Länge eines Arrays zugreifen, aber untergeordnet im Konstruktor schon?
  */

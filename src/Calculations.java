@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Calculations {
     //Instanzvariable
     int result = 0;
@@ -43,7 +45,7 @@ public class Calculations {
     }
 
     // function to calculate the cross sum (Quersumme); Warning: Is not programmed for negative numbers!
-    public int cross(int number) {
+    public int cross(int number) { //wiederverwendeter Code
         int digit = 0;
         int quer = 0;
         while (number>0) {
@@ -52,5 +54,14 @@ public class Calculations {
             number=number/10; 		// because the variable "number" is an integer, dividing by 10 cuts of the last digit (it is not rounded)
         } // local variable number is not reset after while. Is it only reset after a function ends?
         return result = quer;
+    }
+
+    public int random(){
+        Random random = new Random(); //wir erzeugen ein neues Objekt random
+        int randomNumber = random.nextInt(); // und weisen der localen Variable einen random integer zu
+        while (randomNumber < 1) {
+            randomNumber = random.nextInt(); // sollte der integer negativ sein, wird so lange ein neuer random integer generiert, bis der Wert positiv ist
+        }
+        return randomNumber;
     }
 }
