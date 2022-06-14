@@ -12,7 +12,7 @@ public class Calculator extends JFrame implements ActionListener {
     JButton[] numberButtons = new JButton[10]; //wir erzeugen ein Array für unsere Number Buttons
 
     //Negate und Ans
-    //JButton negate = new JButton("(-)");
+    JButton decimal = new JButton(".");
     JButton answer = new JButton("Ans");
 
     //Operation Buttons
@@ -48,14 +48,14 @@ public class Calculator extends JFrame implements ActionListener {
         //Textfield
         //wir bauen das Fenster von oben nach unten auf und starten mit dem ersten Panel, welches sich im head (north) befindet
         JPanel textPanel = new JPanel();
-        textfield.setSize(300, 200); //Textfield Maßen zuweisen
+        textfield.setSize(300, 500); //Textfield Maßen zuweisen
         textfield.setEditable(false); //Eingabe in das Textfeld verbieten
         textPanel.add(textfield); //Textfeld dem Text Panel hinzufügen
 
 
         //Numbers
         //Das zweite Panel ist für unsere Nummern von 0-9, erg und negierte Werte (-). Es wird im Center liegen
-        JPanel numberPanel = new JPanel(new GridLayout(4,3)); //wir geben dem panel ein Grid mit 4 Zeilen und 3 Spalte
+        JPanel numberPanel = new JPanel(new GridLayout(4,3, 10, 10)); //wir geben dem panel ein Grid mit 4 Zeilen und 3 Spalte und die Buttons haben jeweils 10 Pixel Abstand zueinander
         numberPanel.setBackground(Color.DARK_GRAY);
 
         //Number Buttons Text und Actionlistener
@@ -65,7 +65,7 @@ public class Calculator extends JFrame implements ActionListener {
         }
 
         //negate und answer ActionListener
-        //negate.addActionListener(this);
+        decimal.addActionListener(this);
         answer.addActionListener(this);
 
         //Buttons manuell dem Grid hinzufügen --> realitätsgetreu
@@ -78,7 +78,7 @@ public class Calculator extends JFrame implements ActionListener {
         numberPanel.add(numberButtons[1]);
         numberPanel.add(numberButtons[2]);
         numberPanel.add(numberButtons[3]);
-        //numberPanel.add(negate);
+        numberPanel.add(decimal);
         numberPanel.add(numberButtons[0]);
         numberPanel.add(answer);
 
@@ -142,6 +142,15 @@ public class Calculator extends JFrame implements ActionListener {
             }
         }
 
+        //Ans & Decimal
+        if (e.getSource() == answer) {
+            textfield.setText(String.valueOf(result));
+        }
+        if (e.getSource() == decimal) {
+            String text = textfield.getText().replace(".", ""); //sollte bereits ein Dezimalbutton vorhanden sein, so wird dieser entfernt
+            textfield.setText(text.concat(".")); //nun fügen wir einen neuen Dezimalbutton am Ende des bisherigen Strings an
+        }
+
         //als nächstes implementieren wir die Aktionen der einzelnen Funktionsbuttons (Rechenoperatoren)
         //Wird ein operation button (exklusive crossSum) gedrückt so wird der Wert des Tetfeldes der ersten Variable übergeben. Das textfeld wird anschließend geleert
         if (e.getSource() == addButton) {
@@ -200,11 +209,6 @@ public class Calculator extends JFrame implements ActionListener {
             }
 
             textfield.setText(String.valueOf(result)); //Wir wandeln das Ergebnis wieder in einen String, den wir dann im Textfeld ausgeben
-        }
-
-        //Ans
-        if (e.getSource() == answer) {
-            textfield.setText(String.valueOf(result));
         }
 
         //nun kümmenrn wir uns noch um ans, del und clear
