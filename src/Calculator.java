@@ -192,6 +192,7 @@ public class Calculator extends JFrame implements ActionListener {
             textfield.setText("");
         } else if (e.getSource() == crossSumButton) { //bei cross sum und total sum wird die Rechnenoperation sofort ausgeführt, weil diese nur einen einzigen Input haben
             textfield.setText(String.valueOf(calc.cross(Integer.parseInt(textfield.getText()))));
+            result=Integer.parseInt(textfield.getText()); //auch bei Quersumme soll die Answer wiederverwendbar sein
         }
 
         if (e.getSource() == equalsButton) {
